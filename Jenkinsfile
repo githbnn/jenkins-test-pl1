@@ -1,17 +1,20 @@
 pipeline {
-    agent { docker { image 'node:20.11.0-alpine3.19' } }
+    agent any
+
     stages {
-        stage('Initialize'){
+        stage('Build') {
             steps {
-                scripts{
-                    def dockerHome = tool 'myDocker'
-                    env.PATH = "${dockerHome}/bin:${env.PATH}"
-                }        
-          }
+                echo 'Building..'
+            }
         }
-        stage('build') {
+        stage('Test') {
             steps {
-                sh 'node --version'
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
             }
         }
     }
